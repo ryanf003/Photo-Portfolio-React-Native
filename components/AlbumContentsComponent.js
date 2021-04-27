@@ -18,10 +18,12 @@ class AlbumContents extends Component {
         title: 'Campsite Information'
     }
 
+
     render() {
         
         const albumId = this.props.navigation.getParam('albumId');
         const album = this.state.contents.filter(content => content.albumId === albumId);
+        
         
         const renderAlbum = ({item}) => {
             return (

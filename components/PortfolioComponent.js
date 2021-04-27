@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
-import { Tile } from 'react-native-elements';
+import { Tile, TouchableOpacity } from 'react-native-elements';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ALBUMS } from '../shared/albums';
 
 class Portfolio extends Component {
@@ -21,13 +22,22 @@ class Portfolio extends Component {
         const { navigate } = this.props.navigation;
         const renderPortfolioItem = ({item}) => {
             return (
-                <Tile
-                    title={item.name}
-                    imageSrc={item.imageL}
-                    caption={item.date}
-                    featured
-                    onPress={() => navigate('AlbumContents', {albumId: item.id})}
-                />
+                <TouchableWithoutFeedback
+                    onPress={ () => {
+                        navigate('AlbumContents', {albumId: item.id});
+                        /*navigation.setOptions({ title: item.name });*/
+                        
+                    }}
+                >
+                    <Tile
+                        title={item.name}
+                        imageSrc={item.imageL}
+                        caption={item.date}
+                        featured
+                        
+
+                    />
+                </TouchableWithoutFeedback>
             );
         };
 
