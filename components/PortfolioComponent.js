@@ -24,7 +24,7 @@ class Portfolio extends Component {
             return (
                 <TouchableWithoutFeedback
                     onPress={ () => {
-                        navigate('AlbumContents', {albumId: item.id});
+                        navigate('AlbumContents', {albumId: item.id, albumName: item.name});
                         /*navigation.setOptions({ title: item.name });*/
                         
                     }}

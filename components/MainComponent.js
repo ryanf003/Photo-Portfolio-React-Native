@@ -3,6 +3,7 @@ import Home from './HomeComponent';
 import Portfolio from './PortfolioComponent';
 import About from './AboutComponent';
 import AlbumContents from './AlbumContentsComponent';
+import Contact from './ContactComponent';
 import { ALBUMS } from '../shared/albums';
 import { CONTENTS } from '../shared/contents';
 import { View, Platform, StyleSheet } from 'react-native';
@@ -27,7 +28,12 @@ const PortfolioNavigator = createStackNavigator(
         AlbumContents: { 
             screen: AlbumContents,
             navigationOptions: ({navigation}) => ({
-                title: ''
+                title: `${navigation.state.params.albumName}`,
+                headerLeft: <Icon
+                    name='picture-o'
+                    type='font-awesome'
+                    iconStyle={styles.stackIcon}
+                />
             })
         }
     }, 
@@ -49,7 +55,10 @@ const HomeNavigator = createStackNavigator(
     {
         Home: { screen: Home },
         AlbumContents: { 
-            screen: AlbumContents
+            screen: AlbumContents,
+            navigationOptions: ({navigation}) => ({
+                title: `${navigation.state.params.albumName}`
+            })
         }
     },
     {
@@ -94,6 +103,29 @@ const AboutNavigator = createStackNavigator(
     }
 );
 
+const ContactNavigator = createStackNavigator(
+    {
+        Contact: { screen: Contact },
+    },
+    {
+        defaultNavigationOptions: ({navigation}) => ({
+            headerStyle:{
+                backgroundColor: '#3a3f44'
+            },
+            headerTingColor: '#fff',
+            headerTitleStyle:{
+                color: '#fff'
+            },
+            headerLeft: <Icon
+                name='address-card'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    }
+);
+
 const MainNavigator = createDrawerNavigator(
     {
         Home: {
@@ -128,6 +160,20 @@ const MainNavigator = createDrawerNavigator(
                 drawerIcon: ({tintColor}) => (
                     <Icon
                         name='info-circle'
+                        type='font-awesome'
+                        size={24}
+                        color={tintColor}
+                    />
+                )
+            }
+         },
+         Contact: { 
+            screen : ContactNavigator,
+            navigationOptions: {
+                drawerLabel: 'Contact Us',
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='address-card'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
